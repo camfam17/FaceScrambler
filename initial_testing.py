@@ -101,3 +101,11 @@ cv.imshow('scrambe', img5)
 
 cv.waitKey(0)
 cv.destroyAllWindows()
+
+# TODO
+# custom number of blocks
+# shrink rectangle
+# error catrch if no face found
+# ability to scramble multiple faces in one image
+# take picture with webcam
+# take live video with webcam with real time scrambling
