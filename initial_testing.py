@@ -4,7 +4,7 @@ import random
 face_cascade = cv.CascadeClassifier('haarcascade_frontalface_default.xml')
 
 
-blank = cv.imread('face4.jpg')
+blank = cv.imread('face3.jpg')
 img = blank.copy()
 gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 
@@ -27,13 +27,12 @@ cv.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 10)
 cv.imshow('img2', img)
 
 face_roi = img[y:(y+h), x:(x+w)]
-cv.imshow('face', face_roi)
+# cv.imshow('face', face_roi)
 
 
-img3 = img.copy()
-
-img3[0:h, 0:w] = face_roi
-cv.imshow('faceroi', img3)
+# img3 = img.copy()
+# img3[0:h, 0:w] = face_roi
+# cv.imshow('faceroi', img3)
 
 
 # generalize this section to create p^2 blocks where p = 3,4,5 etc
@@ -70,12 +69,6 @@ for i in range(0, 7, 3):
 	shuffle_mat.append(shuffle[i:i+3])
 print('shuffle_mat', shuffle_mat)
 
-
-# shuffle_blocks = []
-# for i in range(9):
-# 	shuffle_blocks.append(blocks[i])
-# print('shuffle_blocks', shuffle_blocks)
-
 shuffle_blocks = []
 for i in range(3):
 	for j in range(3):
@@ -95,7 +88,6 @@ for i in range(3):
 		# img5[y+j*block_height:y+(j*block_height)+block_height, x+i*block_width:x+(i*block_width)+block_width] = img6[shuffle_blocks[k][0]:shuffle_blocks[k][0]+block_width, shuffle_blocks[k][1]:shuffle_blocks[k][1]+block_height]
 		img5[y+j*block_height:y+(j*block_height)+block_height, x+i*block_width:x+(i*block_width)+block_width] = img6[shuffle_blocks[k][1]:shuffle_blocks[k][1]+block_height, shuffle_blocks[k][0]:shuffle_blocks[k][0]+block_width]
 		k += 1
-		pass
 
 cv.imshow('scrambe', img5)
 
@@ -109,3 +101,4 @@ cv.destroyAllWindows()
 # ability to scramble multiple faces in one image
 # take picture with webcam
 # take live video with webcam with real time scrambling
+# use arrow keys to shift face rectangle around a bit for user to centre it on the face
