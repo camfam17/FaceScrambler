@@ -12,12 +12,6 @@ def shuffle_blocks1(blocks, shuffle_mat):
 	
 	return shuffle_blocks
 
-def check_scrambledness(num, shuffle):
-	
-	
-	
-	pass
-
 def get_shuffle_mat():
 	
 	# shuffle the set 0, 1, 2, ... ,blocks_num^2 - 1
@@ -58,8 +52,8 @@ if __name__ == '__main__':
 	face_cascade = cv.CascadeClassifier('haarcascade_frontalface_default.xml')
 	blocks_num = 3
 
-	blank = cv.imread('face2.jpg')
-	blank = cv.resize(blank, (0, 0), fx=0.5, fy=0.5)
+	blank = cv.imread('faces3.jpg')
+	# blank = cv.resize(blank, (0, 0), fx=0.5, fy=0.5)
 	img = blank.copy()
 	gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 
@@ -70,8 +64,8 @@ if __name__ == '__main__':
 
 	img5 = blank.copy()
 	img6 = blank.copy()
-		
-	shuffle_blocks_list = []
+	
+	# shuffle_blocks_list = []
 	for x, y, w, h in face_rect:
 		
 		block_width = int(w/blocks_num)
