@@ -104,3 +104,4 @@ cv.destroyAllWindows()
 # use arrow keys to shift face rectangle around a bit for user to centre it on the face
 # reshuffle button to scramble the blocks differently
 # ability to ensure two adjacent blocks (before shuffling) don't end up in the same position relative to each other after shuffling
+# i.e make sure blocks are sufficiently scrambled
