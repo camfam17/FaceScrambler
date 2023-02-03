@@ -8,24 +8,30 @@ blocks_num = 3
 
 class FaceScrambler():
 	
-	def __init__(self, file='faces2.jpg'):
+	def __init__(self, file='faces2.jpg', resize=True):
 		
-		blank = cv.imread(file)
-		# blank = cv.resize(blank, (0, 0), fx=0.5, fy=0.5)
-		blank = cv.resize(blank, self.smart_dimensions(blank.shape, 1000, 1000))
-		img = blank.copy()
+		self.blank = cv.imread(file)
+		if resize:
+			self.blank = cv.resize(self.blank, self.smart_dimensions(self.blank.shape, 800, 800))
+		
+		img = self.blank.copy()
 		gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 		
 		face_rects = face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=5) # shrink rectangle width for tighter fit
 		print('Number of faces detected:', len(face_rects))
 		print('face_rects', face_rects)
 		
-		scram = self.scramble_faces(blank, face_rects)
+		self.scram = self.scramble_faces(self.blank, face_rects)
 		
-		cv.imshow('scramble', scram)
-		
-		# cv.waitKey(0)
-		# cv.destroyAllWindows()
+		# cv.imshow('scramble', self.scram)
+	
+	
+	def get_blank_image(self):
+		return self.blank()
+	
+	
+	def get_scrambled_image(self):
+		return self.scram
 	
 	
 	# resize the image to fit within the image label but keep original proportions
