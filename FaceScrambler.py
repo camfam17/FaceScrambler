@@ -8,29 +8,43 @@ blocks_num = 3
 
 class FaceScrambler():
 	
-	def __init__(self, file='faces2.jpg', resize=True):
+	def __init__(self, file='faces2.jpg', image=None, resize=True):
 		
-		self.blank = cv.imread(file)
+		if image is not None:
+			self.blank = image
+		else:
+			self.blank = cv.imread(file)
+		
 		if resize:
 			self.blank = cv.resize(self.blank, self.smart_dimensions(self.blank.shape, 800, 800))
 		
 		img = self.blank.copy()
 		gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 		
-		face_rects = face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=5) # shrink rectangle width for tighter fit
-		print('Number of faces detected:', len(face_rects))
-		print('face_rects', face_rects)
+		self.face_rects = face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=5) # shrink rectangle width for tighter fit
+		print('Number of faces detected:', len(self.face_rects))
+		print('face_rects', self.face_rects)
 		
-		self.scram = self.scramble_faces(self.blank, face_rects)
+		# self.scram = self.scramble_faces(self.blank, self.face_rects)
 		
 		# cv.imshow('scramble', self.scram)
 	
 	
 	def get_blank_image(self):
-		return self.blank()
+		return self.blank
 	
 	
-	def get_scrambled_image(self):
+	def get_scrambled_image(self, rescramble=False):
+		
+		# if hasattr(self, self.scram) and rescramble == False:
+		# 	return self.scram
+		# else:
+		# 	self.scram = self.scramble_faces(self.blank, self.face_rects)
+		# 	return self.scram
+		
+		if not hasattr(self, 'scram') or rescramble == True:
+			self.scram = self.scramble_faces(self.blank, self.face_rects)
+		
 		return self.scram
 	
 	

@@ -24,9 +24,15 @@ class MainFrame(ctk.CTkFrame):
 		
 		webcam = cv.VideoCapture(0)
 		
+		
+		
 		while True:
 			check, frame = webcam.read()
 			print(check, frame)
+			
+			scrambler = scram.FaceScrambler(image=frame)
+			frame = scrambler.get_scrambled_image(frame)
+			
 			cv.imshow('video', frame)
 			
 			key = cv.waitKey(1)
@@ -34,6 +40,7 @@ class MainFrame(ctk.CTkFrame):
 				break
 		
 		webcam.release()
+		cv.destroyAllWindows()
 	
 	
 	def select_image_func(self):
